@@ -10,18 +10,54 @@ public class Reto7 {
         Scanner sc = new Scanner(System.in);
         String dificultad;
         do{
-            System.out.println("Elija la dificultad del nivel:\n A. Fácil \n B. Intermedio \n C. Difícil \nPara salir del juego, introduzca el número 0");
+            System.out.println("Escriba A, B o C, según la dificultad del nivel que guste jugar:\n "
+                    + "Opción A. Fácil \n Opción B. Intermedio \n Opción C. Difícil \nPara salir del juego, introduzca el número 0");
             dificultad = sc.next();
+            descifrarPalabra(dificultad);
         }while(!dificultad.equals("0"));
     }
     
-    public static void descifrarPalabra(){
+    public static void descifrarPalabra(String dificultad){
+        Scanner letra = new Scanner(System.in);
+        String palabraSelec = "none", intento;
+        StringBuilder palabraX = new StringBuilder();
         String[] palabras4 = {"gato", "lago", "casa", "pesa", "pato", "pata", "cosa", "mono", "mesa", "cama", "lata", "maiz", "mano",
         "pala", "palo", "paso"};
         String[] palabras8 = {"carruaje", "carrusel", "agricola", "adjetivo", "atrevido", "aventura", "bailarin", "baratija", "barbacoa",
         "avestruz", "blancura", "bofetada", "bombilla", "cafetera", "callejon", "camarero"};
         String[] palabras12 = {"chocolateria", "comprometido", "caballeresco", "calculatoria", "congestionar", "colonizadora", "cognoscitivo",
         "blanqueadura", "burocratizar", "burocratismo", "chachalaqueo", "crematistica", "creiblemente", "cuadragesimo", "cuadrangular", "cuadriculado"};
+        
+        switch (dificultad){
+            case "A":
+            case "a":
+                palabraSelec = palabras4[(int)(Math.random()*16)];
+                palabraX.insert(0, "XXXX");
+                break;
+            case "B":
+            case "b":
+                palabraSelec = palabras8[(int)(Math.random()*16)];
+                palabraX.append("XXXXXXXX");
+                break;
+            case "C":
+            case "c":
+                palabraSelec = palabras12[(int)(Math.random()*16)];
+                palabraX.append("XXXXXXXXXXXX");
+                break;
+            case "0":
+                System.exit(0);
+        }
+        do{
+            System.out.print(">> Introduce la letra: ");
+            intento = letra.next();
+            intento = String.valueOf(intento.charAt(0));
+            for(int i = 0; i<palabraSelec.length(); i++){
+                if(intento.equals(String.valueOf(palabraSelec.charAt(i)))){
+                    palabraX.replace(i, i+1, intento);
+                }
+            }
+            System.out.println(palabraX);
+        }while(!palabraX.toString().equals(palabraSelec));
     }
     
 }
