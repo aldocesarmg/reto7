@@ -8,13 +8,15 @@ public class Reto7 {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        String dificultad;
+        String dificultad, continuar;
         do{
             System.out.println("Escriba A, B o C, según la dificultad del nivel que guste jugar:\n "
                     + "Opción A. Fácil \n Opción B. Intermedio \n Opción C. Difícil \nPara salir del juego, introduzca el número 0");
             dificultad = sc.next();
             descifrarPalabra(dificultad);
-        }while(!dificultad.equals("0"));
+            System.out.println("Felicidades! Has encontrado la palabra!\n ¿Deseas continuar jugando? S/N");
+            continuar = sc.next();
+        }while(continuar.equals("S")||continuar.equals("s"));
     }
     
     public static void descifrarPalabra(String dificultad){
@@ -37,12 +39,12 @@ public class Reto7 {
             case "B":
             case "b":
                 palabraSelec = palabras8[(int)(Math.random()*16)];
-                palabraX.append("XXXXXXXX");
+                palabraX.insert(0, "XXXXXXXX");
                 break;
             case "C":
             case "c":
                 palabraSelec = palabras12[(int)(Math.random()*16)];
-                palabraX.append("XXXXXXXXXXXX");
+                palabraX.insert(0, "XXXXXXXXXXXX");
                 break;
             case "0":
                 System.exit(0);
